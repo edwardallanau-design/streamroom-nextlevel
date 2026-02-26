@@ -1,13 +1,15 @@
 import { createServerClient } from '@supabase/ssr'
 import { NextResponse, type NextRequest } from 'next/server'
 
+const SUPABASE_URL = process.env.NEXT_PUBLIC_SUPABASE_URL
+const SUPABASE_KEY = process.env.NEXT_PUBLIC_SUPABASE_PUBLISHABLE_DEFAULT_KEY
+
 export async function proxy(request: NextRequest) {
   let supabaseResponse = NextResponse.next({ request })
 
-  const supabase = createServerClient(
-    process.env.NEXT_PUBLIC_SUPABASE_URL!,
-    process.env.NEXT_PUBLIC_SUPABASE_PUBLISHABLE_DEFAULT_KEY!,
-    {
+  // Only run session refresh if Supabase is configured
+  if (SUPABASE_URL && SUPABASE_KEY) {
+    const supabase = createServerClient(SUPABASE_URL, SUPABASE_KEY, {
       cookies: {
         getAll() {
           return request.cookies.getAll()
@@ -22,11 +24,11 @@ export async function proxy(request: NextRequest) {
           )
         },
       },
-    }
-  )
+    })
 
-  // Refresh session if expired
-  await supabase.auth.getUser()
+    // Refresh session if expired
+    await supabase.auth.getUser()
+  }
 
   return supabaseResponse
 }
