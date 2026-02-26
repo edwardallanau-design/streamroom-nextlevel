@@ -1,7 +1,7 @@
 'use client'
 
 import { useState } from 'react'
-import { ExternalLink, MessageSquare, MessageSquareOff } from 'lucide-react'
+import { ExternalLink, Heart, MessageSquare, MessageSquareOff } from 'lucide-react'
 import { TwitchPlayer, TwitchChat } from '@/components/TwitchEmbed'
 
 interface StreamLayoutProps {
@@ -36,6 +36,16 @@ export default function StreamLayout({ channel }: StreamLayoutProps) {
             }
             <span className="hidden sm:inline">{chatVisible ? 'HIDE CHAT' : 'SHOW CHAT'}</span>
           </button>
+
+          <a
+            href="https://streamlabs.com/pogingpiggy/tip"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="flex items-center gap-1.5 font-mono text-xs tracking-widest text-cyber-magenta border border-cyber-magenta/30 px-3 py-1.5 hover:border-cyber-magenta hover:glow-box-magenta transition-all clip-corner-sm"
+          >
+            <Heart className="h-3.5 w-3.5" />
+            <span className="hidden sm:inline">DONATE</span>
+          </a>
 
           <a
             href={`https://www.twitch.tv/${channel}`}
