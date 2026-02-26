@@ -1,26 +1,102 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
-
 @theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
+
+  /* Cyberpunk palette */
+  --color-cyber-bg:       #080810;
+  --color-cyber-surface:  #0d0d1a;
+  --color-cyber-elevated: #12122a;
+  --color-cyber-border:   #1e1e3a;
+  --color-cyber-cyan:     #00f5ff;
+  --color-cyber-magenta:  #ff2d78;
+  --color-cyber-yellow:   #faff00;
+  --color-cyber-green:    #39ff14;
+  --color-cyber-muted:    #4a4a7a;
+  --color-cyber-text:     #c8c8e8;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+:root {
+  --background: #080810;
+  --foreground: #c8c8e8;
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  background: #080810;
+  color: #c8c8e8;
+  font-family: var(--font-geist-sans), Arial, Helvetica, sans-serif;
+}
+
+/* ── Neon glow utilities ─────────────────────────────────── */
+
+.glow-cyan {
+  text-shadow: 0 0 8px #00f5ff, 0 0 24px #00f5ff60;
+}
+
+.glow-magenta {
+  text-shadow: 0 0 8px #ff2d78, 0 0 24px #ff2d7860;
+}
+
+.glow-yellow {
+  text-shadow: 0 0 8px #faff00, 0 0 24px #faff0060;
+}
+
+.glow-box-cyan {
+  box-shadow: 0 0 0 1px #00f5ff40, 0 0 16px #00f5ff20;
+}
+
+.glow-box-magenta {
+  box-shadow: 0 0 0 1px #ff2d7840, 0 0 16px #ff2d7820;
+}
+
+/* ── Cyber grid background ───────────────────────────────── */
+
+.cyber-grid {
+  background-image:
+    linear-gradient(rgba(0, 245, 255, 0.04) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(0, 245, 255, 0.04) 1px, transparent 1px);
+  background-size: 60px 60px;
+}
+
+/* ── Clipped corner card shape ───────────────────────────── */
+
+.clip-corner-sm {
+  clip-path: polygon(0 0, calc(100% - 8px) 0, 100% 8px, 100% 100%, 8px 100%, 0 calc(100% - 8px));
+}
+
+.clip-corner {
+  clip-path: polygon(0 0, calc(100% - 14px) 0, 100% 14px, 100% 100%, 14px 100%, 0 calc(100% - 14px));
+}
+
+/* ── Live pulse dot ──────────────────────────────────────── */
+
+@keyframes pulse-live {
+  0%, 100% { opacity: 1; }
+  50%       { opacity: 0.4; }
+}
+
+.live-dot {
+  animation: pulse-live 1.4s ease-in-out infinite;
+}
+
+/* ── Scanlines overlay ───────────────────────────────────── */
+
+.scanlines {
+  position: relative;
+}
+
+.scanlines::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: repeating-linear-gradient(
+    0deg,
+    transparent,
+    transparent 3px,
+    rgba(0, 0, 0, 0.06) 3px,
+    rgba(0, 0, 0, 0.06) 4px
+  );
+  pointer-events: none;
+  z-index: 1;
 }
