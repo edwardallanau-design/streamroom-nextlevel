@@ -100,3 +100,49 @@ body {
   pointer-events: none;
   z-index: 1;
 }
+
+/* ── TipTap editor ───────────────────────────────────────── */
+
+.tiptap p.is-editor-empty:first-child::before {
+  color: var(--color-cyber-muted);
+  content: attr(data-placeholder);
+  float: left;
+  height: 0;
+  pointer-events: none;
+}
+
+/* ── Public about page prose ─────────────────────────────── */
+
+.prose-about h1, .prose-about h2, .prose-about h3 {
+  color: var(--color-cyber-cyan);
+  font-family: var(--font-mono);
+  letter-spacing: 0.05em;
+  margin-top: 1.25rem;
+  margin-bottom: 0.5rem;
+}
+
+.prose-about a {
+  color: var(--color-cyber-cyan);
+  text-decoration: underline;
+}
+
+.prose-about a:hover { color: var(--color-cyber-magenta); }
+
+.prose-about strong { color: var(--color-cyber-text); font-weight: 700; }
+
+.prose-about blockquote {
+  border-left: 2px solid var(--color-cyber-magenta);
+  padding-left: 1rem;
+  color: var(--color-cyber-muted);
+}
+
+.prose-about code {
+  background: var(--color-cyber-elevated);
+  color: var(--color-cyber-green);
+  font-family: var(--font-mono);
+  padding: 0.1em 0.35em;
+  font-size: 0.875em;
+}
+
+.prose-about ul { list-style: disc; padding-left: 1.5rem; }
+.prose-about ol { list-style: decimal; padding-left: 1.5rem; }
